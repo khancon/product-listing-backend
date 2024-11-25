@@ -25,4 +25,10 @@ export const readProductsFromFile = (): Product[] => {
   };
   
 // Function to write products to the JSON file
-export const writeProductsToFile = (products: Pr
+export const writeProductsToFile = (products: Product[]) => {
+    try {
+        fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
+    } catch (error) {
+        console.error('Error writing products file:', error);
+    }
+};

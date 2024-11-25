@@ -20,7 +20,7 @@ app.listen(PORT, () => {
 
 // basic route
 app.get('/', (req: Request, res: Response) => {
-    res.send('Hello Worlds!');
+    res.send('Hello World - V2!');
 });
 
 /** PRODUCT INVENTORY LOGIC */
