@@ -26,12 +26,17 @@
   },
   {
     "id": 6,
-    "name": "Updated Product F",
-    "price": 90
+    "name": "Updated Product F - v3",
+    "price": 75
   },
   {
     "id": 7,
     "name": "Product G",
     "price": 300
+  },
+  {
+    "id": 8,
+    "name": "Product H",
+    "price": 3000
   }
 ]

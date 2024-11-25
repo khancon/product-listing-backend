@@ -20,7 +20,8 @@ RUN npm run build
 EXPOSE 3000
 
 # Step 8: Define the command to start the app
-CMD ["node", "dist/server.js"]
+# CMD ["node", "dist/server.js"]
+CMD ["npm", "start"]
 
 
 # Building docker image: docker build -t product-listing-backend .
