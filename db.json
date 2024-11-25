@@ -38,5 +38,10 @@
     "id": 8,
     "name": "Product H",
     "price": 3000
+  },
+  {
+    "id": 9,
+    "name": "Product I",
+    "price": 5
   }
 ]
