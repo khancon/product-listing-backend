@@ -11,12 +11,19 @@ log.methodFactory = function (methodName, level, loggerName) {
     const rawMethod = originalFactory(methodName, level, loggerName); // Use the captured originalFactory
 
     return function (message) {
-        rawMethod(message); // Log to console
-        logFile.write(`${new Date().toISOString()} [${methodName}]: ${message}\n`);
+        const logEntry = {
+            timestamp: new Date().toISOString(),
+            level: methodName,
+            message
+        };
+        const jsonLogEntry = JSON.stringify(logEntry)
+        rawMethod(jsonLogEntry); // Log to console
+        logFile.write(`${jsonLogEntry}\n`);
     };
 };
 
 // Apply the custom method factory
 log.setLevel('info'); // Levels: trace, debug, info, warn, error, silent
+log.rebuild();
 
 export default log;
