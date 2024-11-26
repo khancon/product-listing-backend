@@ -26,6 +26,13 @@ app.get('/', (req: Request, res: Response) => {
     res.json(products);
 });
 
+// basic route
+app.get('/hello', (req: Request, res: Response) => {
+    res.send('Hello World - V2!');
+    // log.info('Default -- GET request');
+    // res.json(products);
+});
+
 /** PRODUCT INVENTORY LOGIC */
 
 interface Product {

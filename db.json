@@ -27,7 +27,7 @@
   {
     "id": 6,
     "name": "Updated Product F - v3",
-    "price": 75
+    "price": 95
   },
   {
     "id": 7,
@@ -43,5 +43,10 @@
     "id": 9,
     "name": "Product I",
     "price": 5
+  },
+  {
+    "id": 10,
+    "name": "Product J",
+    "price": 20
   }
 ]
