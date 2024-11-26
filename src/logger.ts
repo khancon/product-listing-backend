@@ -9,4 +9,11 @@ log.methodFactory = function (methodName, level, loggerName) {
 
     return function (message) {
         rawMethod(message); // Log to console
-        logFile.write(`${new Date().toISOString()} [${me
+        logFile.write(`${new Date().toISOString()} [${methodName}]: ${message}\n`);
+    };
+};
+
+// Set the default logging level
+log.setLevel('info'); // Levels: trace, debug, info, warn, error, silent
+
+export default log;
