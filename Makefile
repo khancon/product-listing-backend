@@ -10,7 +10,7 @@ run:
 container-id:
 	echo "Container running on $$(docker ps -q | head -n 1)"
 
-restart: stop run
+restart: stop build run
 
 stop:
 	@if [ -n "$$(docker ps -q | head -n 1)" ]; then \
