@@ -9,10 +9,8 @@ import { read } from 'fs';
 const app = express(); //sdfasdf
 
 // middleware
-const allowedOrigins = ['http://localhost:3001'];
-app.use(cors({
-    origin: allowedOrigins,
-})); //enable cors
+// const allowedOrigins = ['http://localhost:3001'];
+app.use(cors()); //enable cors
 app.use(express.json()); // parse json requests
 app.use((req, res, next) => {
     log.info(`Incoming request -- ${req.method} ${req.url}`);
