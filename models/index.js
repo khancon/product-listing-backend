@@ -33,4 +33,25 @@
 
 // Object.keys(db).forEach(modelName => {
 //   if (db[modelName].associate) {
-//     db[modelName].as
+//     db[modelName].associate(db);
+//   }
+// });
+
+// db.sequelize = sequelize;
+// db.Sequelize = Sequelize;
+
+// module.exports = db;
+
+const { Sequelize } = require('sequelize');
+const ProductModel = require('./product');
+
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: './db.sqlite',
+});
+
+const Product = ProductModel(sequelize);
+
+module.exports = { sequelize, Product };
+
+
