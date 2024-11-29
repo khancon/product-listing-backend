@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Updated Product A",
-    "price": 120
+    "name": "Product A",
+    "price": 120000
   },
   {
     "id": 2,
@@ -26,8 +26,8 @@
   },
   {
     "id": 6,
-    "name": "Updated Product F - v3",
-    "price": 95
+    "name": "Product F",
+    "price": 9500
   },
   {
     "id": 7,
@@ -48,5 +48,10 @@
     "id": 10,
     "name": "Product J",
     "price": 20
+  },
+  {
+    "id": 11,
+    "name": "Updated Product K",
+    "price": 155
   }
 ]
