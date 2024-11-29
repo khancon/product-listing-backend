@@ -26,6 +26,7 @@ app.listen(PORT, () => {
 app.get('/', async (req: Request, res: Response) => {
     log.info('Retrieving all products');
     const products = await readProductsFromFile();
+    console.log(products);
     res.json(products);
 });
 
@@ -51,6 +52,10 @@ app.get('/hello', (req: Request, res: Response) => {
 app.get('/api/products', async (req, res) => {
     log.info('Retrieving all products');
     const products = await readProductsFromFile();
+    products.map((p) => {
+        p.description = p.description || 'null'
+    });
+    console.log(products);
     res.json(products);
 });
 
@@ -69,7 +74,7 @@ app.get('/api/products/:id', async (req, res) => {
 
 // POST a new product
 app.post('/api/products', async (req, res) => {
-    const { name, price } = req.body;
+    const { name, price, description } = req.body;
 
     if(!name || price == null){
         log.error("Name or price missing from request");
@@ -79,7 +84,11 @@ app.post('/api/products', async (req, res) => {
         return;
     }
 
-    const product = await Product.create({ name, price });
+    const product = await Product.create({ 
+        name: name, 
+        price: price, 
+        description: !description || description === 'null' ? null : description 
+    });
     log.info(`Product created successfully: ${JSON.stringify(product)}`);
     res.status(201).json(product);
 });
@@ -87,7 +96,7 @@ app.post('/api/products', async (req, res) => {
 // PUT update a product
 app.put('/api/products/:id', async (req, res) => {
     const { id } = req.params;
-    const { name, price } = req.body;
+    const { name, price, description } = req.body;
   
     const product = await Product.findByPk(id);
   
@@ -105,6 +114,7 @@ app.put('/api/products/:id', async (req, res) => {
   
     product.name = name;
     product.price = price;
+    product.description = !description || description === 'null' ? null : description;
     log.info(`Product ${req.params.id} updated successfully: ${JSON.stringify(product)}`);
     await product.save();
   
