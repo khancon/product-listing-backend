@@ -32,5 +32,6 @@ CMD ["npm", "start"]
 # Stop a container: docker stop <container-id>
 # Exec into contianer: docker exec -it <container-id> /bin/sh
 # Stop the first container in docker ps list: docker stop $(docker ps -q | head -n 1)
+# docker run -p 3000:3000 -v $(pwd)/db.sqlite:/app/db.sqlite product-listing-backend
 
 

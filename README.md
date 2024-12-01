@@ -139,3 +139,68 @@ docker ps
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+```
+import java.io.IOException;
+import java.lang.module.Configuration;
+import java.net.URI;
+import java.nio.file.FileSystem;
+import java.nio.file.Path;
+
+class OneLakeS3AFileSystem extends S3AFileSystem {
+
+    private static final String CREDENTIAL_PROVIDER 
+        = "com.capitalone.onelake.aws.provider.OneLakeS3CredentialsProvider";
+    private static final String DEFAULT_FS = "org.apache.hadoop.fs.s3a.S3AFileSystem";
+    private static final Cache<String, S3AFileSystem> fsCache 
+        = CacheBuilder.buildWithBunchOfProperties();
+
+    private S3AFileSystem getFileSystemDelegate(Path path) throws IOException{
+        String s3PathPrefixKey = toPathPrefix(path); //Trim path to prefix
+        try{
+            // look in cache for correct fs instance, if not exist, then create a new one
+            S3AFileSystem instance = fsCache.get(
+                s3PathPrefixKey, 
+                () -> buildFileSystemInstance(s3PathPrefixKey, path)
+            );
+            return instance;
+        } catch (Exception e) {
+            throw new IOException(e);
+        }
+    }
+
+    private S3AFileSystem buildFileSystemInstance(String key, Path path){
+        //Logic for building the FS instance
+
+        //load in user provided hadoop configuration details
+        final Configuration localConf = new Configuration(getConf()); 
+        
+        localConf.set("fs.s3a.impl", DEFAULT_FS);
+        localConf.set("fs.s3a.credentials.provider", CREDENTIAL_PROVIDER);
+
+        /**set a few other needed properties*/
+
+        return (S3AFileSystem) FileSystem.get(URI.create(path.toString()), localConf);
+    }
+
+    // OTHER OneLakeS3AFileSystem METHODS:
+    
+    private String toPathPrefix(Path path){
+        /** REGEX LOGIC FOR TRIMMING PATH TO PREFIX */
+        return path.toString();
+    }
+
+    /**bunch of other required Override methods from S3AFileSystem where 
+     * we return the correct file system delegate from the cache along with 
+     * specific property required by overriden method
+     * 
+     * e.g S3AFileSystem open() method -->
+    */
+
+    @Override
+    public FSDataInputStream open(Path path, int i) throws IOException{
+        return getFileSystemDelegate(path).open(path, i);
+    }
+}
+```

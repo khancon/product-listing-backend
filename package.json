@@ -15,8 +15,15 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.1",
+    "helmet": "^8.0.0",
     "logging": "^3.3.0",
-    "loglevel": "^1.9.2"
+    "loglevel": "^1.9.2",
+    "mysql2": "^3.11.4",
+    "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.5",
+    "sequelize-cli": "^6.6.2",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
